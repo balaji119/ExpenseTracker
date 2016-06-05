@@ -1,0 +1,79 @@
+﻿<Page x:Class="ExpenseTracker.View.AddExpenseView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ignore="http://www.galasoft.ch/ignore"
+        mc:Ignorable="d ignore"
+        DataContext="{Binding AddExpenseViewModel, Source={StaticResource Locator}}"
+        Title="Add Expense">
+    <Page.Resources>
+        <Style TargetType="Label">
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="10,10,10,0"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Margin" Value="10,10,10,0"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="ComboBox">
+            <Setter Property="Margin" Value="10,10,10,0"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="DatePicker">
+            <Setter Property="Margin" Value="10,10,10,0"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="10,10,10,0"/>
+        </Style>
+        <Style TargetType="RowDefinition">
+            <Setter Property="Height" Value="35"/>
+        </Style>
+    </Page.Resources>
+    <DockPanel>
+        <GroupBox Header="Add Expense" Margin="10,10,0,10" Width="350">
+            <Grid DockPanel.Dock="Left">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Label Content="Cost:"></Label>
+                <TextBox Grid.Column="1" Text="{Binding Cost, Mode=TwoWay}"></TextBox>
+                <Label Content="Type:" Grid.Row="1"></Label>
+                <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Types}" 
+                      SelectedItem="{Binding SelectedType}"
+                      SelectedIndex="0"/>
+                <Label Content="Description:" Grid.Row="2"></Label>
+                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Description}"/>
+                <Label Content="Date" Grid.Row="3"></Label>
+                <DatePicker Grid.Row="3" Grid.Column="1" SelectedDate="{Binding Date}"/>
+                <Button Grid.Row="4" Grid.Column="1" Content="Save" Command="{Binding SaveCommand}" IsEnabled="{Binding IsSaveBtnEnabled}"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Summary" Margin="10" Width="150">
+            <Grid DockPanel.Dock="Right">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Row="1" Content="Summary"  Command="{Binding SummaryCommand}" IsEnabled="{Binding IsSummaryBtnEnbled}"/>
+                <Button Grid.Row="2" Content="Expense Graph" IsEnabled="False"/>
+            </Grid>
+        </GroupBox>      
+    </DockPanel>
+</Page>
